@@ -1,0 +1,64 @@
+﻿@model KidKarpool.Models.Request
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Request</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                @*<label asp-for="RequestID" class="control-label"></label>
+            <input asp-for="RequestID" class="form-control" />
+            <span asp-validation-for="RequestID" class="text-danger"></span>*@
+            </div>
+            @*<dl class="row">
+                <label for="@Html.IdFor(m => m.StudentName)">Student Name
+                </label>//tried this to get a space between Student Name and didn't work*@
+                <div class="form-group">
+                <label asp-for="StudentName" class="control-label">Student Name</label>
+                <input asp-for="StudentName" class="form-control" />
+                <span asp-validation-for="StudentName" class="text-danger"></span>
+            </div>
+                <div class="form-group">
+                    <label asp-for="StudentClass" class="control-label">Student Class</label>
+                    <input asp-for="StudentClass" class="form-control" />
+                    <span asp-validation-for="StudentClass" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TimeOfPickUp" class="control-label">Time of Pickup</label>
+                    <input asp-for="TimeOfPickUp" class="form-control" />
+                    <span asp-validation-for="TimeOfPickUp" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IdentifyLot" class="control-label">Specify Lot</label>
+                    <input asp-for="IdentifyLot" class="form-control" />
+                    <span asp-validation-for="IdentifyLot" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ParentName" class="control-label">Parent Name</label>
+                    <input asp-for="ParentName" class="form-control" />
+                    <span asp-validation-for="ParentName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PhoneNumber" class="control-label">Phone Number</label>
+                    <input asp-for="PhoneNumber" class="form-control" />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
