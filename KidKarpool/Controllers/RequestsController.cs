@@ -66,24 +66,31 @@ namespace KidKarpool.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                //This is a redirect to the details action under the request controller and then takes it to the details view
+                return RedirectToAction("details", "Requests", new { id = id });
 
             }
             return View(Request);
+            
         }
+       // public ActionResult SaveInput()
+
+       // {
+            
+       // }
 
         //GET: Request/Accept Request (Parent Accepts Request)
         //This is experimental code 3/13
-        public IActionResult CreateParentAccept()
-        {
-            //creates list of Parents accepting requests to/from the database???
-            var ParentAcceptingName = _context
-                .Accept
-                .Select(x => new SelectListItem(x.ParentAcceptingName, x.AcceptID.ToString()))
-                .ToList();
-            ViewBag.Accept = ParentAcceptingName;
-            return View();
-        }
+      //  public IActionResult CreateParentAccept()
+       // {
+       //     //creates list of Parents accepting requests to/from the database???
+         //  var ParentAcceptingName = _context
+           //    .Accept
+             //  .Select(x => new SelectListItem(x.ParentAcceptingName, x.AcceptID.ToString()))
+               // .ToList();
+            //ViewBag.Accept = ParentAcceptingName;
+            //return View();
+        //}
         //POST: Request/Accept Request
         //I think this is the correct post format, it's from an edit code format but I don't have dropdowns and need the info to bind
         //[HttpPost]

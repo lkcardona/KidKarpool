@@ -47,7 +47,7 @@
         </dd>
     </dl>
         
-    <form asp-action="Edit" method="post">
+    <form asp-controller="Requests" asp-action="Details" asp-route-id="@Model.RequestID"  method="post">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="RequestID"/>
 
