@@ -41,9 +41,9 @@ namespace KidKarpool.Controllers
         //POST: Requests/AcceptRequest -Trial to see if this retains data-"edit" code model /added 3/12
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AcceptRequest(int id, [Bind("AcceptID,StudentName,ParentAcceptingName,DriverPhoneNumber,CarMakeModel")]Accept request)
+        public async Task<IActionResult> AcceptRequest(int id, [Bind("RequestID,StudentName,StudentClass,TimeOfPickUp,IdentifyLot,ParentName,PhoneNumber,ParentAcceptingName,DriverPhoneNumber,CarMakeModel,")]Request request)
         {
-            if(id != request.AcceptID)
+            if (id != request.RequestID)
             {
                 return NotFound();
             }
@@ -57,7 +57,7 @@ namespace KidKarpool.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!RequestExists(request.AcceptID))
+                    if (!RequestExists(request.RequestID))
                     {
                         return NotFound();
                     }
@@ -71,25 +71,25 @@ namespace KidKarpool.Controllers
 
             }
             return View(Request);
-            
-        }
-       // public ActionResult SaveInput()
 
-       // {
-            
-       // }
+        }
+        // public ActionResult SaveInput()
+
+        // {
+
+        // }
 
         //GET: Request/Accept Request (Parent Accepts Request)
         //This is experimental code 3/13
-      //  public IActionResult CreateParentAccept()
-       // {
-       //     //creates list of Parents accepting requests to/from the database???
-         //  var ParentAcceptingName = _context
-           //    .Accept
-             //  .Select(x => new SelectListItem(x.ParentAcceptingName, x.AcceptID.ToString()))
-               // .ToList();
-            //ViewBag.Accept = ParentAcceptingName;
-            //return View();
+        //  public IActionResult CreateParentAccept()
+        // {
+        //     //creates list of Parents accepting requests to/from the database???
+        //  var ParentAcceptingName = _context
+        //    .Accept
+        //  .Select(x => new SelectListItem(x.ParentAcceptingName, x.AcceptID.ToString()))
+        // .ToList();
+        //ViewBag.Accept = ParentAcceptingName;
+        //return View();
         //}
         //POST: Request/Accept Request
         //I think this is the correct post format, it's from an edit code format but I don't have dropdowns and need the info to bind
@@ -108,21 +108,21 @@ namespace KidKarpool.Controllers
         //            _context.Update(accept);
         //            await _context.SaveChangesAsync();
         //        }
-                //catch (DbUpdateConcurrencyException)
-                //{
-                   // if (!CreateParentAccept(accept.AcceptID))
-                   // {
-                     //   return NotFound();
-                    //}
-                    //finally
-                    //{
-                   
+        //catch (DbUpdateConcurrencyException)
+        //{
+        // if (!CreateParentAccept(accept.AcceptID))
+        // {
+        //   return NotFound();
+        //}
+        //finally
+        //{
 
-                      //  throw;
-                //    }
 
-                //} 
-            //I feel this is wrong...I need it to redirect a view of Request Details
+        //  throw;
+        //    }
+
+        //} 
+        //I feel this is wrong...I need it to redirect a view of Request Details
         //        return View(accept);
 
         //    }
@@ -156,6 +156,40 @@ namespace KidKarpool.Controllers
             return View(request);
         }
 
+        ////POST: Details -Copied from AcceptRequest to post Start/End Ride to Database
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Details(int id, [Bind("RequestID,StudentName,StudentClass,TimeOfPickUp,IdentifyLot,ParentName,PhoneNumber,ParentAcceptingName,DriverPhoneNumber,CarMakeModel,")]Request request)
+        //{
+        //    if (id != request.RequestID)
+        //    {
+        //        return NotFound();
+        //    }
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            _context.Update(request);
+        //            await _context.SaveChangesAsync();
+
+        //        }
+        //        catch (DbUpdateConcurrencyException)
+        //        {
+        //            if (!RequestExists(request.RequestID))
+        //            {
+        //                return NotFound();
+        //            }
+        //            else
+        //            {
+        //                throw;
+        //            }
+        //        }
+        //        //This is a redirect to the details action under the request controller and then takes it to the details view
+        //        return RedirectToAction("details", "Requests", new { id = id });
+
+        //    }
+        //    return View(Request);
+        //}
         // GET: Requests/Create
         public IActionResult Create()
         {
@@ -266,6 +300,78 @@ namespace KidKarpool.Controllers
         private bool RequestExists(int id)
         {
             return _context.Requests.Any(e => e.RequestID == id);
+        }
+
+        //POST: Details - Start Ride upon click input will be sent to the database
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> StartTime(int id, [Bind("RequestID,StudentName,StudentClass,TimeOfPickUp,IdentifyLot,ParentName,PhoneNumber,ParentAcceptingName,DriverPhoneNumber,CarMakeModel,RideStarTime")]Request request)
+        {
+           
+            if (id != request.RequestID)
+            {
+                return NotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    request.RideStartTime = DateTime.Now;
+                    _context.Update(request);
+                    await _context.SaveChangesAsync();
+
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!RequestExists(request.RequestID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                //This is a redirect to the details action under the request controller and then takes it to the details view
+                return RedirectToAction("details", "Requests", new { id = id });
+
+            }
+            return View(request);
+        }
+        //POST: Details - Start Ride upon click input will be sent to the database
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EndTime(int id, [Bind("RequestID,RideStartTime,RideEndTime,StudentName,StudentClass,TimeOfPickUp,IdentifyLot,ParentName,PhoneNumber,ParentAcceptingName,DriverPhoneNumber,CarMakeModel,")]Request request)
+        {
+            if (id != request.RequestID)
+            {
+                return NotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    request.RideEndTime = DateTime.Now;
+                    _context.Update(request);
+                    await _context.SaveChangesAsync();
+
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!RequestExists(request.RequestID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                //This is a redirect to the details action under the request controller and then takes it to the details view
+                return RedirectToAction("details", "Requests", new { id = id });
+
+            }
+            return View(Request);
         }
     }
 }

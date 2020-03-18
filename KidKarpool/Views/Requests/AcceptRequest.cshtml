@@ -47,9 +47,17 @@
         </dd>
     </dl>
         
-    <form asp-controller="Requests" asp-action="Details" asp-route-id="@Model.RequestID"  method="post">
+    <form asp-action="AcceptRequest" method="post">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input type="hidden" asp-for="RequestID"/>
+        <input type="hidden" asp-for="RequestID" />
+        <input type="hidden" asp-for="ParentName" />
+        <input type="hidden" asp-for="StudentName" />
+        <input type="hidden" asp-for="StudentClass" />
+        <input type="hidden" asp-for="TimeOfPickUp" />
+        <input type="hidden" asp-for="IdentifyLot" />
+        <input type="hidden" asp-for="RideEndTime" />
+        <input type="hidden" asp-for="RideStartTime" />
+        <input type="hidden" asp-for="PhoneNumber" />
 
         <dl class="row">
             <div class="column">
@@ -84,7 +92,7 @@
         </dl>
 
         <div class="form-group">
-            <input type="submit" value="Save" class="btn btn-primary" />
+            <input type="submit" class="btn btn-primary" />
         </div>
 
         @*<button type="submit" onclick="alert('You accepted a carpool ride request!')">Accept Request</button>*@

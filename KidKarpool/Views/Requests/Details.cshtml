@@ -56,10 +56,36 @@
         </dd>
         
     </dl>
-    <div class="container">
-        <button type="button" class="btn btn-danger">Start Ride</button>
+    <form asp-action="StartTime" method="post">
+        <input asp-for="RequestID" />
+        <input type="hidden" asp-for="ParentName" />
+        <input type="hidden" asp-for="StudentName" />
+        <input type="hidden" asp-for="StudentClass" />
+        <input type="hidden" asp-for="TimeOfPickUp" />
+        <input type="hidden" asp-for="IdentifyLot" />
+        <input type="hidden" asp-for="PhoneNumber" />
+        <input type="hidden" asp-for="DriverPhoneNumber" />
+        <input type="hidden" asp-for="CarMakeModel" />
+        <input type="hidden" asp-for="ParentAcceptingName" />
+
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary" />
+        </div>
+    </form>
+    <form asp-action="EndTime" method="post">
+        <input type="hidden" asp-for="RequestID" />
+        <input type="hidden" asp-for="ParentName" />
+        <input type="hidden" asp-for="StudentName" />
+        <input type="hidden" asp-for="StudentClass" />
+        <input type="hidden" asp-for="TimeOfPickUp" />
+        <input type="hidden" asp-for="IdentifyLot" />        
+        <input type="hidden" asp-for="RideStartTime" />
+        <input type="hidden" asp-for="PhoneNumber" />
+        <input type="hidden" asp-for="DriverPhoneNumber" />
+        <input type="hidden" asp-for="CarMakeModel" />
+        <input type="hidden" asp-for="ParentAcceptingName" />        
         <button type="button" class="btn btn-danger">End Ride</button>
-    </div>
+    </form>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.RequestID">Edit</a> |
