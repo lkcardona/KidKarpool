@@ -308,10 +308,10 @@ namespace KidKarpool.Controllers
         public async Task<IActionResult> StartTime(int id, [Bind("RequestID,StudentName,StudentClass,TimeOfPickUp,IdentifyLot,ParentName,PhoneNumber,ParentAcceptingName,DriverPhoneNumber,CarMakeModel,RideStarTime")]Request request)
         {
            
-            if (id != request.RequestID)
-            {
-                return NotFound();
-            }
+           // if (id != request.RequestID)
+            //{
+            //    return NotFound();
+            //}
             if (ModelState.IsValid)
             {
                 try

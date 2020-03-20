@@ -3,6 +3,8 @@
 @{
     ViewData["Title"] = "Details";
 }
+<script src="https://ajax.googleleapis.com/ajax/libs/jquery1.11.3/jquery.min.js"></script>
+<script scr="js/site.js"></script>
 
 <h1>Accept Request Details</h1>
 <head>
@@ -56,8 +58,9 @@
         </dd>
         
     </dl>
-    <form asp-action="StartTime" method="post">
-        <input asp-for="RequestID" />
+    <form asp-action="StartTime" asp-route-id="@Model.RequestID" method="post">
+       
+        <input type="hidden" asp-for="RequestID" />
         <input type="hidden" asp-for="ParentName" />
         <input type="hidden" asp-for="StudentName" />
         <input type="hidden" asp-for="StudentClass" />
@@ -69,10 +72,24 @@
         <input type="hidden" asp-for="ParentAcceptingName" />
 
         <div class="form-group">
-            <input type="submit" class="btn btn-primary" />
+            @*<button type="button" class="btn btn-danger">Start Ride</button>*@
+            @* Added JQuery to disable button once clicked to prevent duplicate data in the database, also to let user know they have already clicked "start ride" and to subsquently click "end ride" *@
+            <input type="submit" id="idstartride" value="Start Ride" data-submit-value="Submitted" class="btn btn-danger" />
+             @*// This script unfortunately did not disable the button after clicked //*@
+                @*<script type="text/javascript">
+                $(document).ready(function ()
+                {
+                    $("#idstartride").click(function ()
+                    {
+                        $(this).prop("disabled", true);
+                        $(this).css("cursor", "not-allowed");
+                    })
+                })
+            </script>*@
         </div>
     </form>
-    <form asp-action="EndTime" method="post">
+    <form asp-action="EndTime"asp-route-id="@Model.RequestID" method="post">
+       
         <input type="hidden" asp-for="RequestID" />
         <input type="hidden" asp-for="ParentName" />
         <input type="hidden" asp-for="StudentName" />
@@ -88,6 +105,7 @@
     </form>
 </div>
 <div>
+    <br /><br />
     <a asp-action="Edit" asp-route-id="@Model.RequestID">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
