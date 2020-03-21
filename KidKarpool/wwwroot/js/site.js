@@ -2,12 +2,13 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+//Trying to disable the start right button after clicked
 $('.form-disable').on('submit', function ()
 {
     var self = $(this),
         button = self.find('input[type="submit"], button');
     submitValue = button.data('submit-value');
 
-    button.attr('disabled', 'disabled').val(submitValue);
+    button.attr('disabled','disabled').val(submitValue);
     return false;
 });

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -45,6 +46,8 @@ namespace KidKarpool.Models
 
         [System.ComponentModel.DisplayName("Driver Make Model")]
         public string CarMakeModel { get; set; }
+        [NotMapped]
+        public bool ShouldSend { get; set; }
 
     }
 }

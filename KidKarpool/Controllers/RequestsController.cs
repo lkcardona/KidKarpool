@@ -139,7 +139,7 @@ namespace KidKarpool.Controllers
         }
 
         // GET: Requests/Details/5
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int id, bool shouldSend)
         {
             if (id == null)
             {
@@ -152,7 +152,7 @@ namespace KidKarpool.Controllers
             {
                 return NotFound();
             }
-
+            request.ShouldSend = shouldSend;
             return View(request);
         }
 
@@ -333,7 +333,7 @@ namespace KidKarpool.Controllers
                     }
                 }
                 //This is a redirect to the details action under the request controller and then takes it to the details view
-                return RedirectToAction("details", "Requests", new { id = id });
+                return RedirectToAction("details", "Requests", new { id = id, shouldSend = true });
 
             }
             return View(request);

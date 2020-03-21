@@ -3,6 +3,9 @@
 @{
     ViewData["Title"] = "Details";
 }
+
+<script src="js/bootstrap.min.js"></script>
+<script src="js/wow.min.js"></script>
 <script src="https://ajax.googleleapis.com/ajax/libs/jquery1.11.3/jquery.min.js"></script>
 <script scr="js/site.js"></script>
 
@@ -16,50 +19,50 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <div>
-    
+
     <h4> You have accepted a ride request. Please click on the "Start Ride" button when child is picked up and the "End Ride" button when child is dropped off.</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.StudentName)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.StudentName)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.StudentClass)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.StudentClass)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.TimeOfPickUp)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.TimeOfPickUp)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.IdentifyLot)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.IdentifyLot)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ParentName)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ParentName)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.PhoneNumber)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.PhoneNumber)
         </dd>
-        
+
     </dl>
     <form asp-action="StartTime" asp-route-id="@Model.RequestID" method="post">
-       
+
         <input type="hidden" asp-for="RequestID" />
         <input type="hidden" asp-for="ParentName" />
         <input type="hidden" asp-for="StudentName" />
@@ -74,34 +77,36 @@
         <div class="form-group">
             @*<button type="button" class="btn btn-danger">Start Ride</button>*@
             @* Added JQuery to disable button once clicked to prevent duplicate data in the database, also to let user know they have already clicked "start ride" and to subsquently click "end ride" *@
-            <input type="submit" id="idstartride" value="Start Ride" data-submit-value="Submitted" class="btn btn-danger" />
-             @*// This script unfortunately did not disable the button after clicked //*@
-                @*<script type="text/javascript">
-                $(document).ready(function ()
-                {
-                    $("#idstartride").click(function ()
-                    {
+            <input type="submit" id="idstartride" value="Start Ride" data-submit-value="Submitted" class="btn btn-danger" disabled="@Model.ShouldSend" />
+            
+            @*// This script unfortunately did not disable the button after clicked //*@
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    console.log("Handle the button click");
+                    $("#idstartride").click(function () {
                         $(this).prop("disabled", true);
                         $(this).css("cursor", "not-allowed");
                     })
                 })
-            </script>*@
+            </script>
         </div>
     </form>
-    <form asp-action="EndTime"asp-route-id="@Model.RequestID" method="post">
-       
+    <form asp-action="EndTime" asp-route-id="@Model.RequestID" method="post">
+
         <input type="hidden" asp-for="RequestID" />
         <input type="hidden" asp-for="ParentName" />
         <input type="hidden" asp-for="StudentName" />
         <input type="hidden" asp-for="StudentClass" />
         <input type="hidden" asp-for="TimeOfPickUp" />
-        <input type="hidden" asp-for="IdentifyLot" />        
+        <input type="hidden" asp-for="IdentifyLot" />
         <input type="hidden" asp-for="RideStartTime" />
         <input type="hidden" asp-for="PhoneNumber" />
         <input type="hidden" asp-for="DriverPhoneNumber" />
         <input type="hidden" asp-for="CarMakeModel" />
-        <input type="hidden" asp-for="ParentAcceptingName" />        
-        <button type="button" class="btn btn-danger">End Ride</button>
+        <input type="hidden" asp-for="ParentAcceptingName" />
+
+        @*<button type="button" class="btn btn-danger">End Ride</button>*@
+        <input type="submit" id="idendride" value="End Ride" data-submit-value="Submitted" class="btn btn-danger" />
     </form>
 </div>
 <div>
