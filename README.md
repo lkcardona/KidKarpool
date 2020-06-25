@@ -4,7 +4,7 @@
 ### > Start Ride & End Ride times are logged.
 
 ### Status:
-#### Kid Karpool is fully functional. It is not currently being used by any organization, but the intention is to pilot the web application in the future. The basic concepts are fleshed out and application can be tailored to meet the organizations needs. Created in Visual Studio 2019 using MVC with Entity Framework. 
+#### Kid Karpool is fully functional. It is not currently being used by any organization, but the intention is to pilot the web application in the future. The basic concepts are fleshed out and the application can be tailored to meet organizational needs. Created in Visual Studio 2019 using MVC with Entity Framework. 
 ### Future Functions to Deploy:
 ##### > Text messaging notification of a request accepted and subsequent text message notifications for Start Ride/End Ride.
 ##### > A mobile app version
